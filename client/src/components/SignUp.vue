@@ -1,93 +1,89 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>SignUp</h2>
-
-    <input
-      type = "nome"
-      name = "nome"
-      v-model ="nome"
-      placeholder ="nome" />
-    <br>
-    <input
-      type = "email"
-      name = "email"
-      v-model="email"
-      placeholder ="email" />
-    <br>
-    <input
-      type = "senha"
-      name = "senha"
-      v-model="senha"
-      placeholder ="senha" />
-    <br>
-    <!-- ajeitar aq - telefone tem vários e é numero e ddd --->
-    <input
-      type = "telefone"
-      name = "telefone"
-      v-model = "telefone"
-      placeholder ="telefone" />
-    <br>
-    <button @click="signup">
-      Cadastrar usuário
-    </button>
-    
-  </div>
+  <v-layout column>
+    <v-flex xs6 offset-xs3>
+      <panel title="Register">
+        <form 
+          name="tab-tracker-form"
+          autocomplete="off">
+          <v-text-field
+            label="Nome"
+            type="nome"
+            v-model="nome"
+            autocomplete="digite seu nome"
+          ></v-text-field>
+          <br>
+          <v-text-field
+            label="Email"
+            v-model="email"
+          ></v-text-field>
+          <br>
+          <v-text-field
+            label="senha"
+            type="senha"
+            v-model="senha"
+            autocomplete="digite uma senha"
+          ></v-text-field>
+           <!-- ajeitar aq - telefone tem vários e é numero e ddd --->
+          <v-text-field
+            label="Telefone"
+            type="telefone"
+            v-model="telefone"
+            autocomplete="digite seu telefone"
+          ></v-text-field>
+        </form>
+        <br>
+        <div class="danger-alert" v-html="error" />
+        <br>
+        <v-btn
+          dark
+          class="cyan"
+          @click="signUp">
+          SignUp
+        </v-btn>
+      </panel>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
-/* eslint-disable */
 import AuthenticationService from '@/services/AuthenticationService'
 export default {
-  name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
       nome: '',
-      email:'',
-      senha:'',
-      telefone:'',
-      
+      email: '',
+      senha: '',
+      telefone: '',
+      error: null
     }
   },
-  methods:{
-    async signup(){
-      await AuthenticationService.signup({
-        nome: this.nome,
-        email: this.email,
-        senha: this.senha,
-        //telefone
-      })
-      console.log('register button was clicked')
+  methods: {
+    async signUp () {
+      try {
+        const response = await AuthenticationService.signUp({
+          nome: this.nome,
+          email: this.email,
+          senha: this.senha,
+          telefone:this.telefone,
+        })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
+        this.$router.push({
+          name: 'users'
+        })
+      } catch (error) {
+        this.error = error.response.data.error
+      }
     }
-  },
-  watch:{
-    email(value){
-      console.log('email has changed', value)
-    }
-  },
-  mounted(){
-    setTimeout(()=>{
-      this.email='Hello World'
-    })
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>
+
+
+
+
+
+

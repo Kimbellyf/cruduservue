@@ -7,6 +7,9 @@ const User = db.define(
         nome: {
             type: Sequelize.STRING(60)
         },
+        admin: {
+            type: Sequelize.BOOLEAN
+        },
         email: {
             type: Sequelize.STRING(60)
         },
