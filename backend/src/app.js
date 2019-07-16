@@ -8,7 +8,7 @@ const router = express.Router();
 
 // Carrega as rotas
 const indexRoute = require('./routes/index-route');
-const userRoute = require('/routes/user-route');
+const userRoute = require('./routes/user-route');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));

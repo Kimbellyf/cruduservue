@@ -16,9 +16,6 @@ const User = db.define(
         senha: {
             type: Sequelize.STRING(20)
         },
-        telefone: {
-            type: Sequelize.STRING(20)
-        },
     },
     {
         timestamps: false,
@@ -26,5 +23,11 @@ const User = db.define(
         tableName: "user"
     }
 );
+User.associate = function(models) {
+    User.belongsTo(models.UserTelefone, {
+      foreignKey : 'id',
+      targetKey: 'user_id'
+    });
+  };
 
 module.exports = User;

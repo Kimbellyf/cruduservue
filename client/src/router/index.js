@@ -3,7 +3,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import SignUp from '@/components/SignUp'
-import Login from '@/components/Login'
+import SignIn from '@/components/SignIn'
 import MainUser from '@/components/MainUser'
 import SearchUser from '@/components/SearchUser'
 
@@ -22,9 +22,9 @@ export default new Router({
       component: SignUp
     },
     {
-      path: '/login',
-      name: 'login',
-      component: Login
+      path: '/signIn',
+      name: 'signIn',
+      component: SignIn
     },
     {
       path: '/searchuser',

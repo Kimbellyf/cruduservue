@@ -2,6 +2,9 @@
 //requerer database
 //requerer models user
 const ValidationContract = require('../validators/receivedguihandling');
+const User = require("../models/User");
+const db = require("../database/database.js");
+const Op = require("sequelize").Op;
 
 //ajeitar todos os metodos aq embaixo na vdd
 
