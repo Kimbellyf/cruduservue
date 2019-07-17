@@ -4,6 +4,11 @@ const db = require("../database/database");
 const User = db.define(
     "user",
     {
+        user_id : {
+            type: Sequelize.STRING(60),
+            primaryKey: true,
+            autoIncrement: true
+        },
         nome: {
             type: Sequelize.STRING(60)
         },

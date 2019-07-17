@@ -29,7 +29,8 @@ export default new Router({
     {
       path: '/searchuser',
       name: 'searchuser',
-      component: SearchUser
+      component: SearchUser,
+      meta: {auth: 'admin'}
     },
     {
       path: '/mainuser',

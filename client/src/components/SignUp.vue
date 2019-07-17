@@ -1,7 +1,7 @@
 <template>
   <v-layout column>
     <v-flex xs6 offset-xs3>
-      <panel title="Register">
+      <panel title="SignUp">
         <form 
           name="tab-tracker-form"
           autocomplete="off">
@@ -53,7 +53,8 @@ export default {
       nome: '',
       email: '',
       senha: '',
-      telefone: '',
+      telefone: [{ddd:'',numero:''}],
+      admin: '',
       error: null
     }
   },
@@ -65,6 +66,7 @@ export default {
           email: this.email,
           senha: this.senha,
           telefone:this.telefone,
+          admin:this.admin,
         })
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)

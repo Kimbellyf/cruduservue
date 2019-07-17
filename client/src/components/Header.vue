@@ -7,7 +7,7 @@
         :to="{
           name: 'users'
         }">
-        TabTracker
+        Hi
       </router-link>
     </v-toolbar-title>
 

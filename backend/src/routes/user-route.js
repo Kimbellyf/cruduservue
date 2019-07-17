@@ -5,16 +5,25 @@ const router = express.Router();
 const usercontroller = require('../controllers/user-controller');
 const authService = require('../services/auth-service');
 
-//ta faltando o get e tbm ta faltando ajeitar esses posts
-router.post('/signup', usercontroller.post);
-router.post('/login', usercontroller.post);
+
+//cadastro de novo usuário
+router.post('/signup', usercontroller.createUser);
+//login do usuário
+router.post('/signIn', usercontroller.signIn);
 router.post('/authenticate', usercontroller.authenticate);
 router.post('/refresh-token', authService.authorize, usercontroller.refreshToken);
 // get all users
 router.get("/user", authService.authorize , authService.isAdmin, usercontroller.getUsers);
-// gel one user
-router.get("/user/:id", authService.authorize , authService.isAdmin, usercontroller.getUser);
-router.put('/:id', usercontroller.put);
-router.delete('/user/', usercontroller.delete);
+// gel specific user by id , ******
+router.get("/user/:id", authService.authorize , authService.isAdmin, usercontroller.getUserById);
+//update user
+router.put('/user/:id', usercontroller.updateUser);
+//delete user
+router.delete('/user/', usercontroller.deleteUser);
+
+// insert new user
+router.post("/user", usercontroller.createUser);
+
+
 
 module.exports = router;

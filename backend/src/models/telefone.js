@@ -4,6 +4,11 @@ const db = require("../database/database");
 const Telefone = db.define(
     "telefone",
     {
+        telefone_id: {
+            type: Sequelize.STRING(60),
+            primaryKey: true,
+            autoIncrement: true
+        },
         numero: {
             type: Sequelize.STRING(60)
         },
